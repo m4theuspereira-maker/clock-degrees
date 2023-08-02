@@ -14,7 +14,7 @@ export class ClockServices {
 
       if (!result) {
         // Calcular a distância angular
-        const hourAngle = (hourParsed % 12) * 30 + minuteParsed * 0.6; // Cada hora tem 30 graus (360/12) e cada minuto adicional acrescenta 0.5 graus.
+        const hourAngle = (hourParsed % 12) * 30; // Cada hora tem 30 graus (360/12) e cada minuto adicional acrescenta 0.5 graus.
         const minuteAngle = minuteParsed * 6; // Cada minuto tem 6 graus (360/60).
 
         // Calcular a diferença absoluta entre os ângulos
