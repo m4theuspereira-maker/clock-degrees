@@ -13,14 +13,11 @@ export class ClockServices {
       const result = await this.resultRepository.find(hourParsed, minuteParsed);
 
       if (!result) {
-        // Calcular a distância angular
-        const hourAngle = (hourParsed % 12) * 30; // Cada hora tem 30 graus (360/12) e cada minuto adicional acrescenta 0.5 graus.
-        const minuteAngle = minuteParsed * 6; // Cada minuto tem 6 graus (360/60).
+        const hourAngle = (hourParsed % 12) * 30;
+        const minuteAngle = minuteParsed * 6;
 
-        // Calcular a diferença absoluta entre os ângulos
         angularDistance = Math.abs(hourAngle - minuteAngle);
 
-        // Verificar se a distância angular é maior que 180 graus (para sempre obter o menor ângulo)
         if (angularDistance > 180) {
           angularDistance = 360 - angularDistance;
         }
