@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { controllerFactory, middlewaresFactory } from "./factories/factories";
 
-const routes = Router();
 
 const controller = controllerFactory();
 const middlewares = middlewaresFactory();
+const routes = Router();
 
 routes.get("/", (req, res) => res.send("I'm working"));
 routes.get(
