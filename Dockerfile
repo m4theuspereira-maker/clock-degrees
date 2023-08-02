@@ -6,8 +6,6 @@ WORKDIR /app
 
 COPY dist /app/
 COPY node_modules /app/node_modules
-COPY yarn.lock /app/yarn.lock
-
-CMD ["node", "./index.js"]
+COPY package-lock.json /app/package-lock.json
 
 EXPOSE 3000

@@ -1,12 +1,12 @@
 version: "3.7"
 
 services:
-  template:
-    container_name: template
+  application:
+    container_name: clock_degrees
     build:
       context: ./
       dockerfile: ./Dockerfile
-    command: "yarn start"
+    command: "npm run start"
     env_file:
       - .env
     ports:
@@ -14,7 +14,21 @@ services:
     volumes:
       - "./:/app"
     networks:
-      - template_network
+      - clock_degrees_network
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:${POSTGRES_PORT}"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - postgres
 
 networks:
-  template_network:
+  clock_degrees_network:
+        driver: bridge
+  postgres:
+        driver: bridge
+
