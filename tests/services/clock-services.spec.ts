@@ -1,4 +1,4 @@
-import { Mock, Vitest, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ClockServices } from "../../src/services/clock-services";
 import { ResultRepository } from "../../src/infra/repositories/result-repository";
 import { client } from "../../src/config/client/client";
@@ -75,6 +75,26 @@ describe("ClockServices", () => {
       expect(result1).toStrictEqual({ angle: 90 })
       expect(result2).toStrictEqual({ angle: 90 })
       expect(result3).toStrictEqual({ angle: 90 })
+    })
+
+    it("should return angle 90 if it was 9:00, 3:00 and 6:15", async () => {
+
+      vi.spyOn(resultRepository, 'create').mockResolvedValueOnce(null as any)
+      const result1 = await clockServices['claculateAngularDistance'](9, 0)
+      const result2 = await clockServices['claculateAngularDistance'](3, 0)
+      const result3 = await clockServices['claculateAngularDistance'](6, 15)
+
+      expect(result1).toStrictEqual({ angle: 90 })
+      expect(result2).toStrictEqual({ angle: 90 })
+      expect(result3).toStrictEqual({ angle: 90 })
+    })
+
+    it("should call create with correct params", async () => {
+
+      const createResultSpy = vi.spyOn(resultRepository, 'create').mockResolvedValueOnce(null as any)
+      await clockServices['claculateAngularDistance'](9, 0)
+
+      expect(createResultSpy).toHaveBeenCalledWith({ hour: 9, minute: 0, angle: 90 })
     })
   })
 })
