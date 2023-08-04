@@ -23,7 +23,6 @@ export interface IUpdatePayload {
 
 export interface IResult extends ICreateResultDto {
   id: string;
-  createdAt: Date;
-  updatedAt: Date | null;
-  deletedAt: Date | null;
+  date: Date;
+  lastRequest: Date | null;
 }

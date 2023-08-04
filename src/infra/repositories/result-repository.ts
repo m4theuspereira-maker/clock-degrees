@@ -22,7 +22,7 @@ export class ResultRepository implements IRepository {
     try {
       return this.client.result.update({
         where: { id },
-        data: { ...updatePayload, updatedAt: new Date() }
+        data: { ...updatePayload, lastRequest: new Date() }
       });
     } catch (error) {
       throw new InternalServerErrorExpection();
