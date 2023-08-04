@@ -4,7 +4,7 @@ import { ResultRepository } from "../infra/repositories/result-repository";
 export class ClockServices {
   constructor(private readonly resultRepository: ResultRepository) {}
 
-  async calculateDegress(hour: number, minute: number = 0) {
+  async calculateDegrees(hour: number, minute: number = 0) {
     try {
       const hourParsed = Number(hour);
       const minuteParsed = Number(minute);

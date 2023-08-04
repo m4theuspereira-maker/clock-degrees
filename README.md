@@ -84,7 +84,7 @@ Look that container ID will vary each time you type the command **docker-compose
 Enter in project folder to have access to dump file:
 
 ```
-$ cd clock-degress/
+$ cd clock-degrees/
 ```
 
 Now, into project folder you can restore database using container ID in this command:

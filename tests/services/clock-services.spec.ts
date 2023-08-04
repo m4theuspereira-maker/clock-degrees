@@ -19,12 +19,12 @@ describe("ClockServices", () => {
     resultRepository = new ResultRepository(client)
     clockServices = new ClockServices(resultRepository)
   })
-  describe("CalculateDegress", () => {
+  describe("CalculateDegrees", () => {
 
     it("should not call calculation if result were already found", async () => {
       findFirstClientSpy.mockResolvedValueOnce(resultMock)
       const calculateAngularDistanceMock = vi.spyOn(clockServices as any, 'claculateAngularDistance')
-      await clockServices.calculateDegress(12)
+      await clockServices.calculateDegrees(12)
 
       expect(calculateAngularDistanceMock).not.toHaveBeenCalled()
     })
@@ -32,7 +32,7 @@ describe("ClockServices", () => {
     it("should call calculate if result was not found", async () => {
       findFirstClientSpy
       const calculateAngularDistanceMock = vi.spyOn(clockServices as any, 'claculateAngularDistance')
-      await clockServices.calculateDegress(12)
+      await clockServices.calculateDegrees(12)
 
       expect(calculateAngularDistanceMock).toHaveBeenCalled()
     })
@@ -42,7 +42,7 @@ describe("ClockServices", () => {
       findFirstClientSpy.mockResolvedValueOnce(resultMock)
       const updateResultSpy = vi.spyOn(resultRepository, 'update').mockResolvedValueOnce(null as any)
       const calculateAngularDistanceMock = vi.spyOn(clockServices as any, 'claculateAngularDistance')
-      await clockServices.calculateDegress(12)
+      await clockServices.calculateDegrees(12)
 
 
       expect(calculateAngularDistanceMock).not.toHaveBeenCalled()

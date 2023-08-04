@@ -4,14 +4,14 @@ import { ok, serverError } from "./handlers/handles";
 export class ClockController {
   constructor(private readonly clockServices: ClockServices) {}
 
-  getDegress = async (req: Request, res: Response) => {
+  getDegrees = async (req: Request, res: Response) => {
     try {
       const { hour, minute } = req.params as unknown as {
         hour: number;
         minute: number;
       };
 
-      const result = await this.clockServices.calculateDegress(hour, minute);
+      const result = await this.clockServices.calculateDegrees(hour, minute);
 
       return ok(res, result);
     } catch (error) {

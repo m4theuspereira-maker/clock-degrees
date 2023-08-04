@@ -9,12 +9,12 @@ const routes = Router();
 routes.get(
   "/v1/rest/clock/:hour/:minute",
   middlewares.validateHourParam,
-  controller.getDegress
+  controller.getDegrees
 );
 routes.get(
   "/v1/rest/clock/:hour",
   middlewares.validateHourParam,
-  controller.getDegress
+  controller.getDegrees
 );
 
 export { routes };
