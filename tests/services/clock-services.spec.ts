@@ -1,23 +1,28 @@
-import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import { SpyInstance, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { ClockServices } from "../../src/services/clock-services";
 import { ResultRepository } from "../../src/infra/repositories/result-repository";
 import { client } from "../../src/config/client/client";
 import { resultMock } from "../mocks/mocks";
+import { Prisma, PrismaClient } from "@prisma/client";
+import { DeepMockProxy, mockDeep } from "jest-mock-extended";
 
 describe("ClockServices", () => {
 
   let clockServices: ClockServices
   let resultRepository: ResultRepository
-  let resultRepositorySpy: any;
+  let findFirstClientSpy: SpyInstance;
 
-  beforeEach(() => {
+  beforeAll(() => {
+    vi.spyOn(client.result, 'create').mockResolvedValueOnce(null as any)
+    findFirstClientSpy = vi.spyOn(client.result, 'findFirst')
+    vi.spyOn(client.result, 'update').mockResolvedValueOnce(null as any)
     resultRepository = new ResultRepository(client)
-    resultRepositorySpy = vi.spyOn(resultRepository, 'find').mockResolvedValueOnce(resultMock)
     clockServices = new ClockServices(resultRepository)
   })
   describe("CalculateDegress", () => {
 
     it("should not call calculation if result were already found", async () => {
+      findFirstClientSpy.mockResolvedValueOnce(resultMock)
       const calculateAngularDistanceMock = vi.spyOn(clockServices as any, 'claculateAngularDistance')
       await clockServices.calculateDegress(12)
 
@@ -25,14 +30,16 @@ describe("ClockServices", () => {
     })
 
     it("should call calculate if result was not found", async () => {
-      resultRepositorySpy.mockResolvedValueOnce(null)
+      findFirstClientSpy
       const calculateAngularDistanceMock = vi.spyOn(clockServices as any, 'claculateAngularDistance')
       await clockServices.calculateDegress(12)
 
-      expect(calculateAngularDistanceMock).not.toHaveBeenCalled()
+      expect(calculateAngularDistanceMock).toHaveBeenCalled()
     })
 
     it("should call update if result was found", async () => {
+
+      findFirstClientSpy.mockResolvedValueOnce(resultMock)
       const updateResultSpy = vi.spyOn(resultRepository, 'update').mockResolvedValueOnce(null as any)
       const calculateAngularDistanceMock = vi.spyOn(clockServices as any, 'claculateAngularDistance')
       await clockServices.calculateDegress(12)
@@ -45,15 +52,8 @@ describe("ClockServices", () => {
 
   describe("claculateAngularDistance", () => {
 
-    beforeAll(()=>{
-      vi.spyOn(resultRepository, 'create').mockResolvedValueOnce(null as any)
-
-    })
-
     it("should return angle 0 if it was 12 o'clock", async () => {
-
       const result = await clockServices['claculateAngularDistance'](12, 0)
-
       expect(result).toStrictEqual({ angle: 0 })
     })
 
