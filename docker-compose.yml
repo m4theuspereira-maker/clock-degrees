@@ -6,7 +6,7 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
-    command: "npm run start"
+    command: sh -c "npx prisma migrate dev && npm run start"
     env_file:
       - .env
     ports:
@@ -15,6 +15,9 @@ services:
       - "./:/app"
     networks:
       - clock_degrees_network
+      - postgres
+    depends_on:
+      - db
   db:
     image: postgres
     restart: always
@@ -23,12 +26,15 @@ services:
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - ./private/var/lib/postgresql:/var/lib/postgresql
     networks:
       - postgres
 
 networks:
   clock_degrees_network:
-        driver: bridge
+    name: clock_degrees_network
+    driver: bridge
   postgres:
-        driver: bridge
-
+    name: postgres
+    driver: bridge
