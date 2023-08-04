@@ -1,0 +1,125 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Universities Monitor",
+    "version": "1.0.0"
+  },
+  "servers": [{ "url": "http://localhost:3000/" }],
+  "paths": {
+    "/v1/rest/clock/{hour}": {
+      "get": {
+        "summary": "Get pointer angle",
+        "description": "This endpint brings the pointer angle considering that the minutes are aways 00",
+        "tags": ["hour"],
+        "parameters": [
+          {
+            "name": "hour",
+            "in": "path",
+            "description": "Hour in 12 hours pattern",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Angle"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "BAD REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Only intiger numbers are allowed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/rest/clock/{hour}/{minute}": {
+      "get": {
+        "summary": "Get pointer angle",
+        "description": "This endpint brings the pointer angle considering that the minutes are aways 00",
+        "tags": ["hour"],
+        "parameters": [
+          {
+            "name": "hour",
+            "in": "path",
+            "description": "Hour in 12 hours pattern",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "minute",
+            "in": "path",
+            "description": "Minutes allowe are from 0 to 59",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Angle"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "BAD REQUEST",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Only intiger numbers are allowed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Angle": {
+        "type": "object",
+        "properties": {
+          "angle": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
