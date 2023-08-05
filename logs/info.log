@@ -1,0 +1,33 @@
+
+Invalid `this.client.result.findFirst()` invocation in
+/home/matheus/clock-degrees/src/infra/repositories/result-repository.ts:33:33
+
+  30 }
+  31 async find(hour: number, minute: number): Promise<IResult | null> {
+  32   try {
+→ 33     return this.client.result.findFirst(
+Can't reach database server at `db`:`5432`
+
+Please make sure your database server is running at `db`:`5432`.
+
+Invalid `this.client.result.findFirst()` invocation in
+/home/matheus/clock-degrees/src/infra/repositories/result-repository.ts:33:33
+
+  30 }
+  31 async find(hour: number, minute: number): Promise<IResult | null> {
+  32   try {
+→ 33     return this.client.result.findFirst(
+Can't reach database server at `db`:`5432`
+
+Please make sure your database server is running at `db`:`5432`.
+
+Invalid `this.client.result.findFirst()` invocation in
+/home/matheus/clock-degrees/src/infra/repositories/result-repository.ts:33:33
+
+  30 }
+  31 async find(hour: number, minute: number): Promise<IResult | null> {
+  32   try {
+→ 33     return this.client.result.findFirst(
+Can't reach database server at `db`:`5432`
+
+Please make sure your database server is running at `db`:`5432`.

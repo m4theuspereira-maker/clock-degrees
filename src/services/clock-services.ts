@@ -19,7 +19,7 @@ export class ClockServices {
 
       return { angle: result?.angle! };
     } catch (error) {
-      throw new InternalServerErrorExpection();
+      throw new InternalServerErrorExpection(error);
     }
   }
 

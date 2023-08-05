@@ -14,7 +14,7 @@ export class ResultRepository implements IRepository {
     try {
       return this.client.result.create({ data: result });
     } catch (error) {
-      throw new InternalServerErrorExpection();
+      throw new InternalServerErrorExpection(error);
     }
   }
 
@@ -25,14 +25,14 @@ export class ResultRepository implements IRepository {
         data: { ...updatePayload, lastRequest: new Date() }
       });
     } catch (error) {
-      throw new InternalServerErrorExpection();
+      throw new InternalServerErrorExpection(error);
     }
   }
   async find(hour: number, minute: number): Promise<IResult | null> {
     try {
       return this.client.result.findFirst({ where: { hour, minute } });
     } catch (error) {
-      throw new InternalServerErrorExpection();
+      throw new InternalServerErrorExpection(error);
     }
   }
 }
