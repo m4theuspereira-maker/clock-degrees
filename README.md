@@ -69,7 +69,7 @@ $ docker-compose up
 
 ## Restore database from sql script
 
-This repository comes with a mirror with some data ready to be saved in the database via dumping. The dumping can be by the identification of container ID, then you need to execute a docker ps command.
+This repository comes with a mirror with some data ready to be saved in the database via dumping. The dumping can be made by the identification of container ID, so, you need to execute a docker ps command.
 
 ```
 $ docker  ps
@@ -79,7 +79,7 @@ Output:
 
 
 
-Look that container ID will vary each time you type the command **docker-compose up** after a **docker-compose down**, so, is important to remember that you need docker ps to search the containers ID.
+Note that container ID will vary each time you type the command **docker-compose up** after a **docker-compose down**, so, is important to remember that you need **docker ps** to search the containers ID.
 
 Enter in project folder to have access to dump file:
 
@@ -95,16 +95,16 @@ $ docker exec -i <CONTAINER ID> /bin/bash -c "POSTGRES_PASSWORD=posgres psql --u
 Output:
 ![plot](./assets/dump%20result.PNG)
 
-Despite of errors warnings, the operation was made successfully, look that the container ID used is correspondent to postgres image that was listed with the last command
+Despite of errors warnings, the operation was made successfully, look that the container ID used is correspondent to postgres image that was listed with **docker ps** command
 ## To access application from swagger
 
-After run the application via docker using:
+Run the application via docker using:
 
 ```
 $ docker-compose up
 ```
 
-Open your browser at the address http http://localhost:3000/api, and then you'll can test the application endpoints.
+Open your browser at the address http://localhost:3000/api and then you'll can test the application endpoints.
 
 
 ![plot](./assets/swagger.PNG)
