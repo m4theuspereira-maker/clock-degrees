@@ -12,7 +12,11 @@ response:
 angle: 180
 }
 
+### To install dependencies
 
+```
+$ npm i
+```
 ### To build project and add husky configuration
 
 (to know more about husky: https://typicode.github.io/husky/#/)
