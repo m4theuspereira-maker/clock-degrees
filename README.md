@@ -63,7 +63,7 @@ $ npm run test:watch
 $ npm run test:coverage
 ```
 
-### To start project from docker container
+### To start project from docker
 
 (know more in: https://docs.docker.com/get-started/ and https://docs.docker.com/compose/gettingstarted/)
 
