@@ -1,10 +1,7 @@
 export interface IRepository {
   create(input: ICreateResultDto): Promise<IResult>;
 
-  update(
-    id: string,
-    updatePayload: IUpdatePayload
-  ): Promise<IResult>;
+  update(id: string, updatePayload: IUpdatePayload): Promise<IResult>;
 
   find(hour: number, minute?: number): Promise<IResult | null>;
 }
@@ -19,6 +16,7 @@ export interface IUpdatePayload {
   hour?: number;
   minute?: number;
   angle?: number;
+  lastRequest?: Date;
 }
 
 export interface IResult extends ICreateResultDto {

@@ -7,7 +7,7 @@ export class ClockServices {
   async calculateDegrees(hour: number, minute: number = 0) {
     try {
       const hourParsed = Number(hour);
-      const minuteParsed = Number(minute);
+      const minuteParsed = Number.isNaN(Number(minute)) ? 0 : Number(minute);
 
       const result = await this.resultRepository.find(hourParsed, minuteParsed);
 
@@ -15,7 +15,7 @@ export class ClockServices {
         return this.claculateAngularDistance(hourParsed, minuteParsed);
       }
 
-      await this.resultRepository.update(result?.id!, { ...result });
+      await this.resultRepository.update(result?.id!, { lastRequest: new Date()});
 
       return { angle: result?.angle! };
     } catch (error) {
